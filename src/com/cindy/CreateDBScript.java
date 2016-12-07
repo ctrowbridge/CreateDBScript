@@ -31,9 +31,24 @@ public class CreateDBScript {
 	 * the table.
 	 */
 	public void generateScripts() {
+		checkDirectories();
 		generateConnectScript();
 		generateCreateDbScript();
 		generateLoadScript();
+	}
+
+	private void checkDirectories() {
+		File scriptPath = new File("scripts");
+		if (!scriptPath.exists()) {
+			System.out.println("Creating scripts directory ...");
+			boolean success = scriptPath.mkdirs();
+			if (success) {
+				System.out.println("scripts directory created!");
+			} else {
+				System.out.println("Unable to create scripts directory");
+				System.exit(1);
+			}
+		}
 	}
 
 	/**
